@@ -76,20 +76,23 @@ function TrainingThreads({ navigation }) {
         <TextInput
           style={styles.input}
           value={newTrainingName}
-          onChangeText={setNewTrainingName}>
+          onChangeText={setNewTrainingName}
+          testID="editTrainingInput">
         </TextInput>
 
         <TouchableOpacity
           style={styles.button}
           title="Save"
-          onPress={saveEditTodo}>
+          onPress={saveEditTodo}
+          testID="saveButton">
           <Text style={styles.textButton}>Save</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
         style={styles.button}
         title="Cancel"
-        onPress={() => setEditMode(null)}>
+        onPress={() => setEditMode(null)}
+        testID="cancelButton">
           <Text style={styles.textButton}>Cancel</Text>
         </TouchableOpacity>
 
@@ -106,7 +109,7 @@ function TrainingThreads({ navigation }) {
         keyExtractor={(item, index) => index.toString()}
         renderItem={({item}) => (
 
-          <View style={styles.trainingThreadContainer}>
+          <View style={styles.trainingThreadContainer} testID={`trainingItem-${item}`}>
 
             <TouchableOpacity
             style={styles.title}
@@ -118,6 +121,7 @@ function TrainingThreads({ navigation }) {
               <TouchableOpacity
                 style={styles.button}
                 onPress={() => deleteTraining(item)}
+                testID={`deleteButton-${item}`}
               >
                 <Text style={styles.textButton}>Delete</Text>
               </TouchableOpacity>
@@ -125,6 +129,7 @@ function TrainingThreads({ navigation }) {
               <TouchableOpacity
                 style={styles.button}
                 onPress={() => editTraining(item)}
+                testID={`editButton-${item}`}
               >
                 <Text style={styles.textButton}>Edit</Text>
               </TouchableOpacity>
@@ -139,13 +144,14 @@ function TrainingThreads({ navigation }) {
           style={styles.input}
           placeholder="Add new training"
           value={newTraining}
-          onChangeText={setNewTraining}>
+          onChangeText={setNewTraining}
+          testID="newTrainingInput">
         </TextInput>
 
         <TouchableOpacity
           style={styles.button}
           onPress={addTraining}
-          >
+          testID="addButton">
             <Text
             style={styles.textButton}>Add</Text>
         </TouchableOpacity>
