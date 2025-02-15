@@ -120,39 +120,44 @@ function ExerciseList({ route }) {
           style={styles.input}
           placeholder="Exercise name"
           value={editMode ? editedExercise.name : newExercise}
-          onChangeText={text => editMode ? setEditedExercise({ ...editedExercise, name: text }) : setNewExercise(text)}>
-        </TextInput>
+          onChangeText={text => editMode ? setEditedExercise({ ...editedExercise, name: text }) : setNewExercise(text)}
+          testID="exerciseNameInput"
+        />
 
         <TextInput
           style={styles.input}
           placeholder="Series"
           keyboardType="numeric"
           value={editMode ? editedExercise.series.toString() : series}
-          onChangeText={text => editMode ? setEditedExercise({ ...editedExercise, series: text }) : setSeries(text)}>
-        </TextInput>
+          onChangeText={text => editMode ? setEditedExercise({ ...editedExercise, series: text }) : setSeries(text)}
+          testID="seriesInput"
+        />
 
         <TextInput
           style={styles.input}
           placeholder="Reps"
           keyboardType="numeric"
           value={editMode ? editedExercise.reps.toString() : reps}
-          onChangeText={text => editMode ? setEditedExercise({ ...editedExercise, reps: text }) : setReps(text)}>
-        </TextInput>
+          onChangeText={text => editMode ? setEditedExercise({ ...editedExercise, reps: text }) : setReps(text)}
+          testID="repsInput"
+        />
 
         <TextInput
           style={styles.input}
           placeholder="Weight"
           keyboardType="numeric"
           value={editMode ? editedExercise.weight.toString() : weight}
-          onChangeText={text => editMode ? setEditedExercise({ ...editedExercise, weight: text }) : setWeight(text)}>
-        </TextInput>
+          onChangeText={text => editMode ? setEditedExercise({ ...editedExercise, weight: text }) : setWeight(text)}
+          testID="weightInput"
+        />
 
         <TextInput
           style={styles.input}
           placeholder="Expander"
           value={editMode ? editedExercise.expander : expander}
-          onChangeText={text => editMode ? setEditedExercise({ ...editedExercise, expander: text }) : setExpander(text)}>
-        </TextInput>
+          onChangeText={text => editMode ? setEditedExercise({ ...editedExercise, expander: text }) : setExpander(text)}
+          testID="expanderInput"
+        />
 
         <TouchableOpacity
           style={styles.button}
@@ -162,7 +167,9 @@ function ExerciseList({ route }) {
             } else {
               saveExercise();
             }
-          }}>
+          }}
+          testID="saveButton"
+        >
           <Text style={styles.textButton}>{editMode ? "Save changes" : "Save exercise"}</Text>
         </TouchableOpacity>
 
@@ -172,7 +179,9 @@ function ExerciseList({ route }) {
             setIsAdding(false);
             setEditMode(null);
             setEditedExercise({});
-          }}>
+          }}
+          testID="cancelButton"
+        >
           <Text style={styles.textButton}>Cancel</Text>
         </TouchableOpacity>
       </View>
@@ -196,7 +205,9 @@ function ExerciseList({ route }) {
               {item.expander && <Text style={styles.itemText}>{`Expander: ${item.expander}`}</Text>}
               <TouchableOpacity
                 onPress={() => deleteExercise(item)}
-                style={styles.button}>
+                style={styles.button}
+                testID={`deleteButton-${item.id}`}
+              >
                 <Text style={styles.textButton}>Delete</Text>
               </TouchableOpacity>
             </View>
@@ -206,7 +217,9 @@ function ExerciseList({ route }) {
 
       <TouchableOpacity
         style={styles.button}
-        onPress={addExercise}>
+        onPress={addExercise}
+        testID="addExerciseButton"
+      >
         <Text style={styles.textButton}>Add new exercise</Text>
       </TouchableOpacity>
     </View>
