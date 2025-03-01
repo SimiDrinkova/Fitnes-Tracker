@@ -50,7 +50,8 @@ describe('ExerciseList Component', () => {
   it('deletes an exercise', async () => {
     const { getByTestId, getByText, queryByText } = render(<ExerciseList route={route} />);
     await waitFor(() => getByText('Push Up'));
-    fireEvent.press(getByTestId('deleteButton-1'));
+    fireEvent.press(getByText('Push Up')); // Enter edit mode
+    fireEvent.press(getByTestId('deleteButton-1')); // Press delete button
     await waitFor(() => {
       expect(queryByText('Push Up')).toBeNull();
     });
