@@ -15,15 +15,17 @@
   "jest": {
     "preset": "jest-expo",
     "collectCoverage": true,
-  "collectCoverageFrom": [
-    "**/*.{ts,tsx,js,jsx}",
-    "!**/coverage/**",
-    "!**/node_modules/**",
-    "!**/babel.config.js",
-    "!**/expo-env.d.ts",
-    "!**/.expo/**"
-  ],
-  "coverageReporters": ["html"]
+    "collectCoverageFrom": [
+      "**/*.{ts,tsx,js,jsx}",
+      "!**/coverage/**",
+      "!**/node_modules/**",
+      "!**/babel.config.js",
+      "!**/expo-env.d.ts",
+      "!**/.expo/**"
+    ],
+    "coverageReporters": [
+      "html"
+    ]
   },
   "dependencies": {
     "@expo/vector-icons": "^14.0.2",
@@ -53,7 +55,8 @@
     "react-native-screens": "~4.4.0",
     "react-native-storage": "^1.0.1",
     "react-native-web": "~0.19.13",
-    "react-native-webview": "13.12.5"
+    "react-native-webview": "13.12.5",
+    "expo-checkbox": "~4.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
@@ -65,4 +68,6 @@
     "jest-expo": "~52.0.3",
     "react-test-renderer": "18.3.1",
     "typescript": "^5.3.3"
-  },  "private": true}
+  },
+  "private": true
+}

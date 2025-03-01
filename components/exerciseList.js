@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Text, View, StyleSheet, FlatList, TextInput, TouchableOpacity } from "react-native";
 import React from "react";
 import { setItem, getItem } from "@/utils/localStorageUtils";
+import Checkbox from 'expo-checkbox';
 
 function ExerciseList({ route }) {
   const { trainingName } = route.params;
@@ -14,6 +15,7 @@ function ExerciseList({ route }) {
   const [isAdding, setIsAdding] = useState(false);
   const [editMode, setEditMode] = useState(null);
   const [editedExercise, setEditedExercise] = useState({});
+
 
   useEffect(() => {
     const loadExercises = async () => {
@@ -41,6 +43,9 @@ function ExerciseList({ route }) {
   const deleteExercise = (exerciseDelete) => {
     const updatedExercises = exercise.filter((item) => item.id !== exerciseDelete.id);
     setExercise(updatedExercises);
+    setIsAdding(false);
+    setEditMode(null);
+    setEditedExercise({});
     console.log("Exercise deleted: ", exerciseDelete);
   };
 
@@ -184,6 +189,15 @@ function ExerciseList({ route }) {
         >
           <Text style={styles.textButton}>Cancel</Text>
         </TouchableOpacity>
+      {editMode && (
+      <TouchableOpacity
+        onPress={() => deleteExercise(editedExercise)}
+        style={styles.button}
+        testID={`deleteButton-${editedExercise.id}`}
+      >
+        <Text style={styles.textButton}>Delete</Text>
+      </TouchableOpacity>
+      )}
       </View>
     );
   }
@@ -203,13 +217,23 @@ function ExerciseList({ route }) {
               <Text style={styles.itemText}>{`Reps: ${item.reps}`}</Text>
               {item.weight && <Text style={styles.itemText}>{`Weight: ${item.weight} kg`}</Text>}
               {item.expander && <Text style={styles.itemText}>{`Expander: ${item.expander}`}</Text>}
-              <TouchableOpacity
-                onPress={() => deleteExercise(item)}
-                style={styles.button}
-                testID={`deleteButton-${item.id}`}
-              >
-                <Text style={styles.textButton}>Delete</Text>
-              </TouchableOpacity>
+              <Checkbox
+                value={item.done}
+                style={styles.checkbox}
+                onValueChange={() => {
+                  const updatedExercises = exercise.map((exerciseItem) => {
+                    if (exerciseItem.id === item.id) {
+                      return {
+                        ...exerciseItem,
+                        done: !exerciseItem.done
+                      };
+                    }
+                    return exerciseItem;
+                  });
+                  setExercise(updatedExercises);
+                }}
+              > 
+              </Checkbox>
             </View>
           </TouchableOpacity>
         )}
@@ -263,7 +287,10 @@ const styles = StyleSheet.create({
     margin: 12,
     borderWidth: 1,
     padding: 10,
-  }
+  },
+  checkbox: {
+    alignSelf: "center",
+  }, 
 });
 
 export default ExerciseList;
